@@ -1,0 +1,472 @@
+
+.formTD
+{
+    font-family: tahoma;
+    font-size: 12px;
+    text-align: right;
+}
+.normalTD
+{
+    font-family: tahoma;
+    font-size: 12px;
+    text-align: right;
+}
+body, td, th
+{
+    font-family: tahoma;
+    font-size: 12px;
+    margin-bottom: 0px;
+    margin-right: 40px;
+}
+
+h2
+{
+    font-family: B Mitra,tahoma;
+    font-size: 14pt;
+    color: #113304;
+}
+.note
+{
+    font-family: B Nazanin, tahoma;
+    font-size: 10pt;
+    color: #441008;
+}
+.pageFotter
+{
+    color: #111188;
+    font-family: Tahoma;
+    font-weight: bold;
+    font-size: 9pt;
+    background-color: #FFFFDD;
+}
+.ClickableImage
+{
+    cursor: pointer;
+}
+.menuTD
+{
+    font-family: tahoma;
+    font-size: 11px;
+    font-weight: normal;
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+}
+.content
+{
+    font-family: Tahoma;
+    font-size: 9pt;
+    color: #0a2003;
+    text-align: justify;
+}
+.top
+{
+    background-color: #FFBBD0;
+}
+.listView
+{
+}
+.listViewHeader
+{
+}
+.listViewFotter
+{
+}
+.listViewRow0
+{
+}
+.listViewRow1
+{
+}
+.text
+{
+    font-family: Tahoma;
+    font-size: 9pt;
+}
+.formButton
+{
+    font-family: Tahoma;
+    font-size: 9pt;
+    width: 90px;
+}
+.selectStyle
+{
+    font-family: Tahoma;
+    font-size: 9pt;
+}
+.formBox
+{
+    font-family: Tahoma;
+    font-size: 9pt;
+}
+.linkList
+{
+    font-family: B Jadid, tahoma;
+    font-size: 11pt;
+    text-align: right;
+    text-decoration: none;
+    color: #226604;
+    cursor: pointer;
+    line-height: 24pt;
+}
+.captionTD
+{
+    text-align: left;
+}
+.attention
+{
+    font-family: Tahoma;
+    font-size: 8pt;
+    font-weight: bold;
+    color: #EE1008;
+}
+
+.information
+{
+    font-family: tahoma;
+    font-size: 9pt;
+    font-weight: bold;
+    font-style: normal;
+    color: #000080;
+}
+.billInformation
+{
+    font-family: tahoma;
+    font-size: 9pt;
+    font-style: normal;
+    color: #000080;
+}
+.footer
+{
+    font-family: tahoma;
+    font-size: 11px;
+    font-weight: normal;
+    color: #333333;
+}
+.link1:link
+{
+    font-family: tahoma;
+    font-size: 11px;
+    font-weight: normal;
+    color: #003399;
+    text-decoration: none;
+}
+.link1:visited
+{
+    font-family: tahoma;
+    font-size: 11px;
+    font-weight: normal;
+    color: #003399;
+    text-decoration: none;
+}
+.link1:hover
+{
+    font-family: tahoma;
+    font-size: 11px;
+    font-weight: normal;
+    color: #0099CC;
+    text-decoration: underline;
+}
+.link5:link
+{
+    font-family: tahoma;
+    font-size: 14px;
+    font-weight: normal;
+    color: #000000;
+    text-decoration: none;
+    line-height: 17pt;
+}
+.link5:visited
+{
+    font-family: tahoma;
+    font-size: 14px;
+    font-weight: normal;
+    color: #000000;
+    text-decoration: none;
+    line-height: 17pt;
+}
+.link5:hover
+{
+    font-family: tahoma;
+    font-size: 14px;
+    font-weight: normal;
+    color: #FF0000;
+    text-decoration: underline;
+    line-height: 17pt;
+}
+.text1
+{
+    font-family: tahoma;
+    font-size: 11px;
+    font-weight: bold;
+    color: #d82e00;
+    text-decoration: none;
+}
+.odd
+{
+    background-color: #DBFAC5;
+}
+.even
+{
+    background-color: #FFFFD5;
+}
+.billTd
+{
+    border: 1px solid #666666;
+}
+.billResultOdd
+{
+    font-family: tahoma;
+    font-size: 10pt;
+   
+    font-style: normal;
+    border: 1px dashed #FFFFFF;
+    background-color: #E7CEFF;
+}
+.billResultEven
+{
+    font-family: tahoma;
+    font-size: 10pt;
+    
+    font-style: normal;
+    border: 1px dashed #FFFFFF;
+    background-color: #F4EAFF;
+}
+
+.billResultOddEpayment
+{
+    font-family: tahoma;
+    font-size: 10pt;
+    font-style: normal;
+    background-color: #E7CEFF;
+}
+
+.failedBillResultOddEpayment
+{
+    font-family: tahoma;
+    font-size: 10pt;
+    font-style: normal;
+    background-color: #F3E0D9;
+}
+
+.billResultEvenEpayment
+{
+    font-family: tahoma;
+    font-size: 10pt;
+    font-style: normal;
+    background-color: #F4EAFF;
+}
+
+.failedBillResultEvenEpayment
+{
+    font-family: tahoma;
+    font-size: 10pt;
+    font-style: normal;
+    background-color: #F3E0D9;
+}
+
+.sumOfBill
+{
+    font-family: tahoma;
+    font-size: 9pt;
+    font-weight: bold;
+    background-color: #D3D3D3;
+}
+.header
+{
+    font-family: tahoma;
+    font-size: 9pt;
+    color: #451616;
+    text-align: right;
+    direction: rtl;
+}
+.oddInformation
+{
+    color: #002F00;
+    font-weight: bold;
+}
+.evenInformation
+{
+    color: #460000;
+    font-weight: bold;
+}
+.balanceTable
+{
+    border: 1px solid #999999;
+    color: #000000;
+    font-family: tahoma;
+    font-size: 9pt;
+    width: 84px;
+}
+.balanceHeader
+{
+    border: 1px solid #999999;
+    color: #333333;
+    font-family: tahoma;
+    font-size: 9pt;
+    background-color: #FFF3E6;
+}
+.link2
+{
+    font-family: tahoma;
+    font-size: 11px;
+    color: #3C1E00;
+    text-decoration: none;
+}
+.menuTD
+{
+    background-color: #FFF1AE;
+    font-weight: bold;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #FFFFFF;
+}
+.subMenuTD
+{
+    background-color: #FFF7D2;
+    padding-bottom: 0px;
+}
+.confirmTD
+{
+    border: 1px dashed #FFBC79;
+}
+.menuBorder
+{
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #FFFFFF;
+    padding-bottom: 0px;
+}
+.captchaImage
+{
+    border-style: solid;
+    border-width: 1px;
+}
+.evenStatement
+{
+    border: 1px solid #999999;
+    color: #000000;
+    font-family: tahoma;
+    font-size: 12px;
+    background-color: #F2F2FF;
+    text-align: center;
+    direction: ltr;
+}
+.oddStatement
+{
+    border: 1px solid #999999;
+    color: #000000;
+    font-family: tahoma;
+    font-size: 12px;
+    background-color: #F9FDFF;
+    text-align: center;
+    direction: ltr;
+}
+.masterLines
+{
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-top-color: #df9a00;
+    border-bottom-color: #df9a00;
+}
+.marquee
+{
+    background-color: #FCF1DC;
+    width: 100%;
+    height: 16px;
+}
+.menuLink
+{
+    font-family: tahoma;
+    font-size: 11px;
+    color: #000000;
+    text-decoration: none;
+}
+.okResultTbl
+{
+    border: 1px solid #310062;
+    font-family: tahoma;
+    font-size: x-small;
+    background-color: #F4EAFF;
+}
+.failedResultTbl
+{
+    border: 1px solid #800000;
+    background-color: #FFE6E6;
+    font-family: tahoma;
+    font-size: x-small;
+}
+.resultTd
+{
+    border: 1px dashed #FFFFFF;
+}
+.rowStyle
+{
+    background-color: #FFFBD6;
+    font-family: Tahoma;
+    color: #333333;
+}
+
+.headerStyle
+{
+    background-color: #FFE1A4;
+    color: #993300;
+    font-size: X-Small;
+    font-weight: bold;
+}
+.pagerStyle
+{
+    background-color: #FFE1A4;
+    color: #333333;
+}
+.selectedRowStyle
+{
+    font-weight: bold;
+    color: Navy;
+    background-color: #FFFBD6;
+}
+.footerStyle
+{
+    color: White;
+    background-color: #990000;
+    font-weight: bold;
+}
+.loginTbl
+{
+    border: 1px solid #FFAC59;
+}
+.merchantLoginBody
+{
+    background-color: #FFF4DF;
+}
+.line
+{
+    width: 100%;
+    height: 2px;
+    background: #ccc;
+    margin: 2px 0;
+}
+.SelectCard
+{
+    font-family: Tahoma;
+    font-size: 9pt;
+    direction: ltr;
+    text-align: right;
+    width: auto;
+}
+
+ .CaptchaRefreshImage
+ {
+     background-image:url('/images/refreshBtn.jpg');
+     background-position:center ;
+     cursor:pointer;
+     border:none;
+     background-color:transparent;
+     background-repeat:no-repeat;
+     position:relative;
+     
+     width:18px;
+     height:18px;
+}
