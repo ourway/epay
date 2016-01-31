@@ -1,496 +1,157 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="pragma" content="no-cache" /><meta http-equiv="Expires" content="-1" />
   <meta charset="utf8" />
-  <title>پرداخت اینترنتی قبوض</title>
-  <link href="style.css" type="text/css" rev="Stylesheet" rel="Stylesheet" />
+  <title>EPay</title>
+  <link rel="Stylesheet" href="style.css" />
+  <script src="angular.js"></script>
+  <script src="nganimate.js"></script>
+  <script src="uirouter.js"></script>
+  <script src="script.js"></script>
 </head>   
-<body dir="rtl">
-  <form name="aspnetForm" id="aspnetForm">
-    <div>
-      <table width="730" border="0" cellspacing="0" cellpadding="0" align="center">
-        <tr>
-          <td height="63" valign="bottom" colspan="2" >
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <td colspan="2">
-                  <img src="images/epayment.header.JPG" id="ctl00_headerImg" alt="logo" />
-                </td>            
-              </tr>
-            </table>
-          </td>
-        </tr>
-        <tr> 
-          <td height="1" colspan="2"></td>
-        </tr>
-        <tr> 
-          <td width="100%" height="19" align="right" class="masterLines" colspan="2">
-            <table width="100%" cellpadding="0" cellspacing="0">
-              <tr>
-                <td nowrap align="left">
-                  &nbsp;&nbsp;
-                  <span>
-                    <strong>سیستم پرداخت اینترنتی بانک پاسارگاد</strong>
-                  </span>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-        <tr> 
-          <td valign="top" align="right" colspan="2">
-            <table width="730">
-              <tr>
-                <td>
-                  <a id="website" href="http://bpi.ir" class="link1" tabindex="-1">ورود به سايت پاسارگاد </a>
-                  &nbsp;&nbsp;
-                  <a href="Enrol.aspx" id="ctl00_hMenu__enrolLink" class="link1" tabindex="-1">عضویت در سایت</a>
-                  &nbsp;&nbsp;
-                  <a id="newF" href="../EPaymentFeatures.aspx" class="link1" tabindex="-1" target="_blank">سرويس‌های جديد</a>
-                  &nbsp;&nbsp;
-                  <a id="help" href="../help.aspx" class="link1" tabindex="-1" target="_blank">راهنمای پرداخت اینترنتی</a>
-                  &nbsp;&nbsp;
-                  <a id="faq" href="../FAQ.aspx" class="link1" tabindex="-1" target="_blank">سوالات متداول</a>
-                  &nbsp;&nbsp;
-                  <a id="purposes" href="../purposes.aspx" class="link1" tabindex="-1">ارائه نظرات و پیشنهادات</a>
-                  &nbsp;&nbsp;
-                  <input type="submit" name="ctl00$hMenu$btn" value="Button" id="ctl00_hMenu_btn" style="display:none;" />
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-        <tr>
-          <td valign="top" align="right" colspan="2">
-            <b>
-              <font color="#6F3700" size="1">
-                <marquee class="marquee"  scrollamount="4" direction="right"></marquee>
-              </font>
-            </b>
-          </td>
-        </tr>   
-        <tr> 
-          <td rowspan="1" valign="top" align="right">
-            <table width="130" cellpadding="2px" border="0" cellspacing="0px">
-              <tr>
-                <td colspan="2" class="menuTD">
-                  <a href="#" onclick="hideAndUNhideObj('div1')" class="menuLink" tabindex="-1">پرداخت اینترنتی</a>
-                </td>
-              </tr>
-              <tr style="display: block;" id="div1">
-                <td class="subMenuTD">
-                  <table width="130" cellpadding="2px" cellspacing="0">
-                    <tr>
-                      <td width="10px" class="menuBorder">&nbsp;</td>
-                      <td class="menuBorder">
-                        <a href="../ShaparakBillPayment.aspx" class="link2" tabindex="-1">پرداخت قبض</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="menuBorder">&nbsp;</td>
-                      <td class="menuBorder">
-                        <a href="../ShaparakBatchBillPayment.aspx" class="link2" tabindex="-1">پرداخت قبض گروهی</a>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-              <div id="ctl00_menu__chargeCardLink">
-                <tr>
-                  <td colspan="2" class="menuTD">
-                    <a href="#" onclick="hideAndUNhideObj('div6')" class="menuLink" tabindex="-1">خرید شارژ</a>
-                  </td>
-                </tr>
-                <tr style="display: block;" id="div6">
-                  <td class="subMenuTD">
-                    <table width="130" cellpadding="2px" cellspacing="0">
-                      <tr>
-                        <td class="menuBorder" width="10px">&nbsp;</td>
-                        <td class="menuBorder"><a href="../ShaparakIrancellCC.aspx" class="link2" tabindex="-1">شارژ ایرانسل</a></td>
-                      </tr>
-                      <tr>
-                        <td width="10px" class="menuBorder">&nbsp;</td>
-                        <td class="menuBorder">
-                          <a href="../ShaparakMciCC.aspx" class="link2" tabindex="-1">شارژ همراه اول</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td width="10px" class="menuBorder">&nbsp;</td>
-                        <td class="menuBorder">
-                          <a href="../ShaparakRightelCC.aspx" class="link2" tabindex="-1">شارژ رایتل</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td width="10px" class="menuBorder">&nbsp;</td>
-                        <td class="menuBorder">
-                          <a href="../ShaparakTaliyaCC.aspx" class="link2" tabindex="-1">شارژ تالیا</a>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </div>
-              <tr>
-                <td colspan="2" class="menuTD">
-                  <a href="#" class="menuLink" tabindex="-1">عملیات کارت</a>
-                </td>
-              </tr>
-              <tr style="display: block;" id="div8">
-                <td class="subMenuTD">
-                  <table width="130" cellpadding="2px" cellspacing="0">
-                    <tr>
-                      <td class="menuBorder">&nbsp;</td>
-                      <td class="menuBorder">
-                        <a href="../changePin2.aspx" class="link2" tabindex="-1">تغییر رمز اینترنتی</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="menuBorder">&nbsp;</td>
-                      <td class="menuBorder">
-                        <a href="../BlockCard.aspx" class="link2" tabindex="-1">مسدود کردن کارت</a>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="2" class="menuTD">
-                  <a href="#" onclick="hideAndUNhideObj('div2')" class="menuLink" tabindex="-1">عملیات بانکی</a>
-                </td>
-              </tr>
-              <tr style="display: block;" id="div2">
-                <td class="subMenuTD">
-                  <table width="130" cellpadding="2px" cellspacing="0">
-                    <tr id="PayOrderSubMenu">
-                      <td width="10px" class="menuBorder">
-                        &nbsp;
-                      </td>
-                      <td class="menuBorder">
-                        <a href="../PayOrder.aspx" class="link2" tabindex="-1">انتقال کارت به کارت</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td width="10px" class="menuBorder">
-                        &nbsp;
-                      </td>
-                      <td class="menuBorder">
-                        <a href="../TransferToAccount.aspx" class="link2" tabindex="-1">انتقال كارت به سپرده</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td width="10px" class="menuBorder">
-                        &nbsp;
-                      </td>
-                      <td class="menuBorder">
-                        <a href="../BalanceInquiry.aspx" class="link2" tabindex="-1">اعلام موجودی</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td width="10px" class="menuBorder">
-                        &nbsp;
-                      </td>
-                      <td class="menuBorder">
-                        <a href="../GetStatement.aspx" class="link2" tabindex="-1">صورت حساب</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td width="10px" class="menuBorder">
-                          &nbsp;
-                      </td>
-                      <td class="menuBorder">
-                          <a href="../BatchTransfer.aspx" class="link2" tabindex="-1">انتقال وجه گروهی</a>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="2" class="menuTD">
-                  <a href="#" onclick="hideAndUNhideObj('div10')" class="menuLink" tabindex="-1">کارت مجازی</a>
-                </td>
-              </tr>
-              <tr style="display: block;" id="div10">
-                <td class="subMenuTD">
-                  <table width="130" cellpadding="2px" cellspacing="0">
-                    <tr>
-                      <td width="10px" class="menuBorder">
-                        &nbsp;
-                      </td>
-                      <td class="menuBorder">
-                        <a href="../GetCyberCard.aspx" class="link2" tabindex="-1">خرید كارت مجازی</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td width="10px" class="menuBorder">
-                        &nbsp;
-                      </td>
-                      <td class="menuBorder">
-                        <a href="../ExtendCyberCard.aspx" class="link2" tabindex="-1">تمدید کارت مجازی</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td width="10px" class="menuBorder">
-                        &nbsp;
-                      </td>
-                      <td class="menuBorder">
-                        <a href="../ChargeCyberCard.aspx" class="link2" tabindex="-1">شارژ کارت مجازی</a>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="2" class="menuTD">
-                  <a href="#" onclick="hideAndUNhideObj('div7')" class="menuLink" tabindex="-1">پرداخت همراه</a>
-                </td>
-              </tr>
-              <tr style="display: block;" id="div7">
-                <td class="subMenuTD">
-                  <table width="130" cellpadding="2px" cellspacing="0">
-                    <tr>
-                      <td width="10px" class="menuBorder">
-                        &nbsp;
-                      </td>
-                      <td class="menuBorder">
-                        <a href="../MobilePaymentDownload.aspx" class="link2" tabindex="-1">دریافت برنامه</a>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="2" class="menuTD">
-                  <a href="#" onclick="hideAndUNhideObj('div9')" class="menuLink" tabindex="-1">پرداخت همراه (USSD)&nbsp; </a>
-                </td>
-              </tr>
-              <tr style="display: block;" id="div9">
-                <td class="subMenuTD">
-                  <table width="130px" cellpadding="2px" cellspacing="0">
-                    <tr>
-                      <td width="10px" class="menuBorder">
-                        &nbsp;
-                      </td>
-                      <td class="menuBorder">
-                        <a href="../USSD" class="link2" tabindex="-1">راهنمای سرویس USSD</a>
-                      </td>
-                    </tr>
-                    <tr >
-                      <td colspan="2">
-                        <table  cellpadding="2px" cellspacing="0" id="MPaySubMenu">
-                          <tr>
-                            <td width="10px" class="menuBorder">
-                              &nbsp;
-                            </td>
-                            <td width="120px" class="menuBorder">
-                              <a href="../RegisterUSSDCode.aspx" class="link2" tabindex="-1">ثبت كد USSD</a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td width="10px" class="menuBorder">
-                              &nbsp;
-                            </td>
-                            <td width="120px" class="menuBorder">
-                              <a href="../EditUSSDInfo.aspx" class="link2" tabindex="-1">ويرايش اطلاعات</a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td width="10px" class="menuBorder">
-                              &nbsp;
-                            </td>
-                            <td width="120px" class="menuBorder">
-                              <a href="../EditCards.aspx" class="link2" tabindex="-1">ثبت كارت</a>
-                            </td>
-                          </tr>
-                        </table>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="2" class="menuTD">
-                  <a href="#" onclick="hideAndUNhideObj('div4')" class="menuLink" tabindex="-1">پیگیری</a>
-                </td>
-              </tr>
-            </table>
-            <div>
-              <table id="ctl00_login" width="130" class="loginTbl">
-                <tr>
-                  <td align="center">
-                    <img src="images/paypal.login.JPG" id="ctl00_paypalImg" />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    نام کاربری:
-                    <br />
-                    <input name="ctl00$userName" type="text" id="ctl00_userName" tabindex="50" autocomplete="off" style="width:100px;" />
-                    <span id="ctl00_RequiredFieldValidator1" class="attention" style="color:Red;visibility:hidden;">*</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    کلمه عبور:
-                    <br />
-                    <input name="ctl00$password" type="password" id="ctl00_password" tabindex="51" style="width:100px;" />
-                    <span id="ctl00_RequiredFieldValidator2" class="attention" style="color:Red;visibility:hidden;">*</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div id="ctl00_UpdatePanel2">                    
-                      <table id="ctl00_loginCaptchaTbl" width="125">
-                        <tr>
-                          <td>
-                            <span id="ctl00_loginCaptcha" class="captchaImage"><img src=ImageHandler.ashx?guid=4e077e03-89b2-4bf0-847c-7c9415331d63></span>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <input name="ctl00$loginCatchaTxt" type="text" id="ctl00_loginCatchaTxt" tabindex="52" title="متن بالا را وارد كنید" class="formBox" dir="ltr" style="width:72px;" />
-                            <input type="image" name="ctl00$imageBtn1" id="ctl00_imageBtn1" tabindex="-1" title="متن جدید" src="images/refreshBtn.jpg" align="absmiddle" style="border-width:0px;" />
-                            <span id="ctl00_RequiredFieldValidator4" class="attention" style="color:Red;display:none;">*</span>
-                          </td>
-                        </tr>
-                      </table>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <input type="submit" name="ctl00$btnLogin" value="ورود" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$btnLogin&quot;, &quot;&quot;, true, &quot;login&quot;, &quot;&quot;, false, false))" id="ctl00_btnLogin" tabindex="52" class="formButton" style="width:70px;" />
-                    <br />
-                    <a id="ctl00_HyperLink1" tabindex="-1" class="link1" href="ForgotPassword.aspx" style="font-size:8pt;">کلمه عبور خود را فراموش کرده اید؟</a>
-                    <br />
-                    <a id="ctl00_HyperLink2" tabindex="-1" class="link1" href="Enrol.aspx">ثبت نام</a>
-                    <br />
-                    <span id="ctl00_errorLbl" class="attention"></span>
-                  </td>
-                </tr>
-              </table>        
-            </div>
-          </td>
-          <td valign="top" align="center" width="100%">
-            <h1 class="header">پرداخت اینترنتی قبوض</h1>
-            <div id="ctl00_mainPlace_billDataPanel">
-              <fieldset>
-                <legend style="color: Blue;">پرداخت از طریق شناسه قبض و شناسه پرداخت</legend>
-                <br />
-                <div id="ctl00_mainPlace_Panel1" onkeypress="javascript:return WebForm_FireDefaultButton(event, 'ctl00_mainPlace_checkData')">
-                  <table width="590px" border="0" align="center">
-                    <tr>
-                      <td align="left" width="150">
-                        شناسه قبض* :
-                      </td>
-                      <td class="formTD" width="440">
-                        <input name="ctl00$mainPlace$billId" type="text" maxlength="13" id="ctl00_mainPlace_billId" tabindex="1" class="formBox" dir="ltr" oninput="convertChars(this)" style="width:150px;" />
-                        <a href="help.aspx#05" target="help" tabindex="-1">
-                          <img alt="توضیحات بیشتر" src="images/help.PNG" class="link5" border="0" /></a>
-                        <span id="ctl00_mainPlace_RequiredFieldValidator1" class="attention" style="color:Red;display:none;">*</span>
-                        <span id="ctl00_mainPlace_RegularExpressionValidator2" class="attention" style="color:Red;display:none;">*</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td align="left">
-                        شناسه پرداخت* :
-                      </td>
-                      <td class="formTD">
-                        <input name="ctl00$mainPlace$paymentId" type="text" maxlength="13" id="ctl00_mainPlace_paymentId" tabindex="2" class="formBox" dir="ltr" oninput="convertChars(this)" style="width:150px;" />
-                        <a href="help.aspx#05" target="help" tabindex="-1">
-                          <img alt="توضیحات بیشتر" src="images/help.PNG" border="0" /></a><span id="ctl00_mainPlace_RequiredFieldValidator2" class="attention" style="color:Red;display:none;">*</span>
-                        <span id="ctl00_mainPlace_RegularExpressionValidator1" class="attention" style="color:Red;display:none;">*</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td align="left">
-                        پست الکترونیکی (اختیاری) :
-                      </td>
-                      <td class="formTD">
-                        <input name="ctl00$mainPlace$eMail" type="text" id="ctl00_mainPlace_eMail" tabindex="3" class="formBox" dir="ltr" style="width:150px;" />
-                        <a href="help.aspx#06" target="help" tabindex="-1">
-                          <img alt="توضیحات بیشتر" src="images/help.PNG" border="0" />
-                        </a>
-                        <span id="ctl00_mainPlace_RegularExpressionValidator3" class="attention" style="color:Red;visibility:hidden;">*</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        &nbsp;
-                      </td>
-                      <td class="formTD">
-                        <input type="submit" name="ctl00$mainPlace$checkData" value="ادامه" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$mainPlace$checkData&quot;, &quot;&quot;, true, &quot;billData&quot;, &quot;&quot;, false, false))" id="ctl00_mainPlace_checkData" tabindex="4" class="formButton" style="width:70px;" />&nbsp;
-                      </td>
-                    </tr>
-                  </table>
-                </div>
-                <br />
-              </fieldset>
-            </div>
-            <br />
-            <div id="ctl00_mainPlace_mobileBillData">
-              <fieldset>
-                <legend style="color: Blue;">پرداخت قبض موبایل از طریق شماره موبایل(همراه اول)</legend>
-                <br />
-                <div id="ctl00_mainPlace_checkMobileData">
-                  <table width="590px" border="0" align="center">
-                    <tr nowrap>
-                      <td align="left" width="150">
-                        شماره موبایل* :
-                      </td>
-                      <td class="formTD" width="440">
-                        <input name="ctl00$mainPlace$txtMobileNo" type="text" maxlength="11" id="ctl00_mainPlace_txtMobileNo" tabindex="4" class="formBox" dir="ltr" oninput="convertChars(this)" style="width:150px;" />
-                        <a href="help.aspx#11" target="help" tabindex="-1">
-                          <img alt="توضیحات بیشتر" src="images/help.PNG" class="link5" border="0" />
-                        </a>
-                        <label>(مثال:09121234567)</label>
-                        <span id="ctl00_mainPlace_RequiredFieldValidator3" class="attention" style="color:Red;display:none;">*</span>
-                        <br />
-                        <span id="ctl00_mainPlace_RegularExpressionValidator4" class="attention" style="color:Red;display:none;">فرمت شماره وارد شده صحیح نمی باشد</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td align="left">
-                        پست الکترونیکی (اختیاری) :
-                      </td>
-                      <td class="formTD">
-                        <input name="ctl00$mainPlace$txtEmailforMobile" type="text" id="ctl00_mainPlace_txtEmailforMobile" tabindex="5" class="formBox" dir="ltr" style="width:150px;" />
-                        <a href="help.aspx#06" target="help" tabindex="-1">
-                          <img alt="توضیحات بیشتر" src="images/help.PNG" border="0" />
-                        </a>
-                        <span id="ctl00_mainPlace_RegularExpressionValidator6" class="attention" style="color:Red;visibility:hidden;">*</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        &nbsp;
-                      </td>
-                      <td class="formTD">
-                        <input type="submit" name="ctl00$mainPlace$btnCheckMobileData" value="ادامه" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$mainPlace$btnCheckMobileData&quot;, &quot;&quot;, true, &quot;mobileData&quot;, &quot;&quot;, false, false))" id="ctl00_mainPlace_btnCheckMobileData" tabindex="6" class="formButton" style="width:70px;" />&nbsp;
-                      </td>
-                    </tr>
-                  </table>
-                </div>
-                <br />
-              </fieldset>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td valign="top" colspan="3">
-            <table width="100%" border="0" cellspacing="5" cellpadding="0">
-              <tr>
-                <td style="background-image: url('images/copy_line.gif')" width="100%">&nbsp;</td> 
-                <td nowrap align="center" class="footer">&copy; تمامی حقوق برای بانک پاسارگاد محفوظ است. bpi.ir</td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-        <tr style ="display:none;">
-          <td align="center"  colspan="2"></td>
-        </tr>
-      </table>
+<body ng-app="app">
+  <div id="wrapper">
+    <img src="images/epayment.header.JPG" alt="logo" />
+    <div id="title">سیستم پرداخت اینترنتی بانک پاسارگاد</div>
+    <div id="top-links-row">
+      <a href="#">ورود به سایت پاسارگاد</a>
+      <a href="#">عضویت در سایت</a>
+      <a href="#">سرویس‌های جدید</a>
+      <a href="#">راهنمای پرداخت اینترنتی</a>
+      <a href="#">سوالات متداول</a>
+      <a href="#">ارائه نظرات و پیشنهادات</a>
     </div>
-  </form>
+    <div id="orange-seperator"></div>
+    <div id="sidebar" ng-controller="sidebarCtrl">
+      <input id="sidebar-search" placeholder="جستحو..." ng-model="filter" ng-change="onFilter()" />
+      <div ng-repeat="item in items">
+        <a class="item header" ng-click="item.collapsed = !item.collapsed" ng-if="item.items.length">
+          <span ng-if="!item.highlight" ng-bind="item.title"></span>
+          <span ng-if="item.highlight">
+            <span ng-bind="item.title.substr(0, item.highlight.start)"></span>
+            <span class="highlight" ng-bind="item.title.substring(item.highlight.start, item.highlight.end)"></span>
+            <span ng-bind="item.title.substr(item.highlight.end, item.title.length - item.highlight.end)"></span>
+          </span>
+        </a>
+        <div class="group" ng-class="{collapsed: item.collapsed}">
+          <a class="item" ng-repeat="item in item.items" ui-sref="{{item.sref}}">
+            <span ng-if="!item.highlight" ng-bind="item.title"></span>
+            <span ng-if="item.highlight">
+              <span ng-bind="item.title.substr(0, item.highlight.start)"></span>
+              <span class="highlight" ng-bind="item.title.substring(item.highlight.start, item.highlight.end)"></span>
+              <span ng-bind="item.title.substr(item.highlight.end, item.title.length - item.highlight.end)"></span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div id="contents">
+      <div id="view" ui-view></div>
+    </div>
+    <div class="clearfix"></div>
+    <div id="footer">
+      <div id="footer-line"></div>
+      <div id="footer-text">&copy; تمامی حقوق برای بانک پاسارگاد محفوظ است. bpi.ir</div>
+    </div>
+  </div>
+  <script type="text/ng-template" id="shaparakBillPayment.html">
+    <h1 class="header">پرداخت اینترنتی قبوض</h1>
+    <fieldset>
+      <legend>پرداخت از طریق شناسه قبض و شناسه پرداخت</legend>
+      <div class="input-group">
+        <label>شناسه قبض* :</label>
+        <input />
+        <a>
+          <img src="images/help.png" alt="توضیحات بیشتر" />
+        </a>
+      </div>
+      <div class="input-group">
+        <label>شناسه پرداخت* :</label>
+        <input />
+        <a>
+          <img src="images/help.png" alt="توضیحات بیشتر" />
+        </a>
+      </div>
+      <div class="input-group">
+        <label>پست الکترونیکی (اختیاری) :</label>
+        <input />
+        <a>
+          <img src="images/help.png" alt="توضیحات بیشتر" />
+        </a>
+      </div>
+      <input type="submit" class="submit" value="ادامه" />
+    </fieldset>
+    <fieldset>
+      <legend>پرداخت قبض موبایل از طریق شماره موبایل(همراه اول)</legend>
+      <div class="input-group">
+        <label>شماره موبایل* :</label>
+        <input />
+        <a>
+          <img src="images/help.png" alt="توضیحات بیشتر" />
+        </a>
+        <span>(مثال:09121234567)</span>
+      </div>
+      <div class="input-group">
+        <label>پست الکترونیکی (اختیاری) :</label>
+        <input />
+        <a>
+          <img src="images/help.png" alt="توضیحات بیشتر" />
+        </a>
+      </div>
+      <input type="submit" class="submit" value="ادامه" />
+    </fieldset>
+  </script>
+  <script type="text/ng-template" id="shaparakBatchBillPayment.html">
+    <h1 class="header">پرداخت قبض گروهی</h1>
+  </script>
+  <script type="text/ng-template" id="shaparakIrancellCC.html">
+    <h1 class="header">خرید شارژ ایرانسل</h1>
+  </script>
+  <script type="text/ng-template" id="shaparakMciCC.html">
+    <h1 class="header">خرید شارژ همراه اول</h1>
+  </script>
+  <script type="text/ng-template" id="shaparakRightelCC.html">
+    <h1 class="header">خرید شارژ رایتل</h1>
+  </script>
+  <script type="text/ng-template" id="shaparakTaliyaCC.html">
+    <h1 class="header">خرید شارژ تالیا</h1>
+  </script>
+  <script type="text/ng-template" id="changePin2.html">
+    <h1 class="header">تغییر رمز اینترنتی کارت (PIN2)</h1>
+  </script>
+  <script type="text/ng-template" id="blockCard.html">
+    <h1 class="header">مسدود کردن کارت</h1>
+  </script>
+  <script type="text/ng-template" id="payOrder.html">
+    <h1 class="header">انتقال وجه</h1>
+  </script>
+  <script type="text/ng-template" id="transferToAccount.html">
+    <h1 class="header">انتقال وجه کارت به سپرده</h1>
+  </script>
+  <script type="text/ng-template" id="balanceInquiry.html">
+    <h1 class="header">اعلام موجودی</h1>
+  </script>
+  <script type="text/ng-template" id="getStatement.html">
+    <h1 class="header">صورت حساب</h1>
+  </script>
+  <script type="text/ng-template" id="batchTransfer.html">
+    <h1 class="header">انتقال وجه گروهی</h1>
+  </script>
+  <script type="text/ng-template" id="getCyberCard.html">
+    <h1 class="header">به دستور بانک مرکزی تا اطلاع ثانوی امکان خرید کارت مجازی مقدور نمی باشد</h1>
+  </script>
+  <script type="text/ng-template" id="extendCyberCard.html">
+    <h1 class="header">تمدید کارت مجازی</h1>
+  </script>
+  <script type="text/ng-template" id="chargeCyberCard.html">
+    <h1 class="header">شارژ کارت مجازی</h1>
+  </script>
+  <script type="text/ng-template" id="mobilePaymentDownload.html">
+    <h1 class="header">دریافت برنامه پرداخت همراه</h1>
+  </script>
+  <script type="text/ng-template" id="USSD.html">
+    <h1 class="header">راهنمای سرویس USSD</h1>
+  </script>
 </body>
 </html>
