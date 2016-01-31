@@ -73,11 +73,12 @@ angular.module('app', ['ngAnimate', 'ui.router'])
 
 .controller('sidebarCtrl', function($scope) {
   $scope.filter = '';
-  $scope.items = sidebarItems;
+  function copyItems() { return  sidebarItems.map(function(item) { return angular.copy(item); }); }
+  $scope.items = copyItems();
   $scope.onFilter = function() {
     var filter = $scope.filter;
     if (!filter)
-      return $scope.items = sidebarItems;
+      return $scope.items = copyItems();
     function getHighlight(text, filter, skip) {
       var index = text.indexOf(filter);
       if (!~index)
@@ -103,7 +104,7 @@ angular.module('app', ['ngAnimate', 'ui.router'])
         return { start: start + skip, end: end + skip };
       return { start: start, end: end };
     }
-    var items = sidebarItems.map(function(item) {
+    $scope.items = sidebarItems.map(function(item) {
       item = angular.copy(item);
       var headerInFilter = false;
       item.highlight = getHighlight(item.title, filter);
@@ -119,6 +120,5 @@ angular.module('app', ['ngAnimate', 'ui.router'])
       item.items = newSubItems;
       return item;
     });
-    $scope.items = items;
   }
 })
