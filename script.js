@@ -54,6 +54,25 @@ var sidebarItems = [
   }
 ];
 
+function getHighlights(text, filter) {
+  var results = [];
+  for (var start = 0; start < text.length; start++) {
+    if ((start === 0 || text.charAt(start - 1) === ' ') && text.charAt(start) === filter.charAt(0)) {
+      for (var i = 0; i < filter.length; i++) {
+        var end = start + i;
+        if (end >= text.length || text.charAt(end) !== filter.charAt(i))
+          break;
+        if (i === filter.length - 1) {
+          while (end < text.length - 1 && text.charAt(end + 1) !== ' ')
+            end++;
+          results.push({ start: start, end: end });
+        }
+      }
+    }
+  }
+  return results;
+}
+
 angular.module('app', ['ngAnimate', 'ui.router'])
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -71,54 +90,90 @@ angular.module('app', ['ngAnimate', 'ui.router'])
   });
 })
 
-.controller('sidebarCtrl', function($scope) {
+.directive('epayHighlights', function() {
+  return {
+    link: function(scope, element, attributes) {
+      scope.$watch(attributes.epayHighlights, function(highlights) {
+        if (highlights && highlights.length) {
+          function isHighlighted(index) {
+            return highlights.filter(function (highlight) { return highlight.start <= index && index <= highlight.end; }).length > 0;
+          }
+          var value = scope.$eval(attributes.ngBind);
+          var parts = [];
+          var lastPartWasHighlighted;
+          for (var i=0; i<value.length; i++) {
+            var highlighted = isHighlighted(i);
+            var character = value.charAt(i);
+            if (highlighted === lastPartWasHighlighted)
+              parts[parts.length - 1] += character;
+            else
+              parts.push(character);
+            lastPartWasHighlighted = highlighted;
+          }
+          element.html(parts.map(function(part, i) {
+            return '<span ' + ((parts.length + lastPartWasHighlighted + i + 1) % 2 ? 'class="highlight"' : '') + '>' + part + '</span>';
+          }).join(''));
+        }
+      });
+    }
+  };
+})
+
+.controller('sidebarCtrl', function($scope, $state) {
   $scope.filter = '';
-  function copyItems() { return  sidebarItems.map(function(item) { return angular.copy(item); }); }
-  $scope.items = copyItems();
+  $scope.$watch(function() { return $state.current; }, function(state) {
+    if ($scope.filter === '')
+      $scope.previousState = $state.current.name;
+  });
+  function reset() {
+    $scope.items = sidebarItems.map(function(item) { return angular.copy(item); });
+    if ($scope.previousState)
+      $state.go($scope.previousState);
+  }
+  reset();
   $scope.onFilter = function() {
     var filter = $scope.filter;
     if (!filter)
-      return $scope.items = copyItems();
-    function getHighlight(text, filter, skip) {
-      var index = text.indexOf(filter);
-      if (!~index)
-        return null;
-      var wordDescriptors = text.split(' ').reduce(function(prev, word) {
-        var previousItem = prev[prev.length - 1];
-        var start = previousItem ? previousItem.end + 1 : 0;
-        return prev.concat([{
-          start: start,
-          end: start + word.length
-        }]);
+      return reset();
+    function getWordsHighlights(text) {
+      return filter.split(' ').reduce(function(highlights, filter) {
+        if (highlights.invalid)
+          return [];
+        var newHighlights = getHighlights(text, filter).filter(function(h1) {
+          return highlights.filter(function(h2) {
+            return h1.start === h2.start && h1.end === h2.end;
+          }).length === 0;
+        });
+        if (!newHighlights.length) {
+          highlights = [];
+          highlights.invalid = true;
+          return highlights;
+        }
+        return highlights.concat(newHighlights);
       }, []);
-      var startingWord = wordDescriptors.filter(function(section) {
-        return index === section.start;
-      })[0];
-      if (!startingWord || (skip && index === 0))
-        return getHighlight(text.substring(index + 1, text.length), filter, (skip ? skip + index : index) + 1);
-      start = startingWord.start;
-      var end = wordDescriptors.filter(function(section) {
-        return index + filter.length >= section.start && index + filter.length <= section.end;
-      })[0].end;
-      if (skip)
-        return { start: start + skip, end: end + skip };
-      return { start: start, end: end };
     }
     $scope.items = sidebarItems.map(function(item) {
       item = angular.copy(item);
       var headerInFilter = false;
-      item.highlight = getHighlight(item.title, filter);
-      if (item.highlight)
+      item.highlights = getWordsHighlights(item.title);
+      if (item.highlights.length)
         headerInFilter = true;
       var previousSubItems = item.items;
       var newSubItems = [];
       previousSubItems.forEach(function(item) {
-        item.highlight = getHighlight(item.title, filter);
-        if (item.highlight || headerInFilter)
+        item.highlights = getWordsHighlights(item.title);
+        if (item.highlights.length || headerInFilter)
           newSubItems.push(item);
       });
       item.items = newSubItems;
       return item;
     });
+    for (var i=0; i<$scope.items.length; i++) {
+      var item = $scope.items[i];
+      if (item.items.length > 0) {
+        $state.go(item.items[0].sref);
+        break;
+      }
+    }
   }
 })

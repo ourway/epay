@@ -73,6 +73,15 @@ a {
   color: black;
 }
 
+#sidebar .item.active {
+  background-color: #DDF2FF;
+  margin: 1px 0;
+  padding: 5px 11px;
+  font-size: 11px;
+  display: block;
+  color: black;
+}
+
 #sidebar .item .highlight {
   color: red;
 }
@@ -86,7 +95,7 @@ a {
 
 #sidebar .group {
   overflow: hidden;
-  transition: 0.5s;
+  transition: 0.3s;
   max-height: 150px;
   opacity: 1;
 }
@@ -109,14 +118,14 @@ a {
   margin-right: 20px;
   width: 600px;
   position: relative;
-  min-height: 1000px;
+  min-height: 700px;
 }
 
 #contents #view { 
   position: absolute;
   top: 0;
   right: 0;
-  transition: 0.5s;
+  transition: 0.3s;
 }
 
 #contents #view.ng-enter, #contents #view.ng-leave-active {

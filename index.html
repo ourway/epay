@@ -26,23 +26,9 @@
     <div id="sidebar" ng-controller="sidebarCtrl">
       <input id="sidebar-search" placeholder="جستحو..." ng-model="filter" ng-change="onFilter()" />
       <div ng-repeat="item in items">
-        <a class="item header" ng-click="item.collapsed = !item.collapsed" ng-if="item.items.length">
-          <span ng-if="!item.highlight" ng-bind="item.title"></span>
-          <span ng-if="item.highlight">
-            <span ng-bind="item.title.substr(0, item.highlight.start)"></span>
-            <span class="highlight" ng-bind="item.title.substring(item.highlight.start, item.highlight.end)"></span>
-            <span ng-bind="item.title.substr(item.highlight.end, item.title.length - item.highlight.end)"></span>
-          </span>
-        </a>
+        <a class="item header" ng-click="item.collapsed = !item.collapsed" ng-if="item.items.length" ng-bind="item.title" epay-highlights="item.highlights"></a>
         <div class="group" ng-class="{collapsed: item.collapsed}">
-          <a class="item" ng-repeat="item in item.items" ui-sref="{{item.sref}}">
-            <span ng-if="!item.highlight" ng-bind="item.title"></span>
-            <span ng-if="item.highlight">
-              <span ng-bind="item.title.substr(0, item.highlight.start)"></span>
-              <span class="highlight" ng-bind="item.title.substring(item.highlight.start, item.highlight.end)"></span>
-              <span ng-bind="item.title.substr(item.highlight.end, item.title.length - item.highlight.end)"></span>
-            </span>
-          </a>
+          <a class="item" ng-repeat="item in item.items" ng-bind="item.title" epay-highlights="item.highlights" ui-sref="{{item.sref}}" ui-sref-active="active"></a>
         </div>
       </div>
     </div>
