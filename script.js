@@ -147,12 +147,15 @@ angular.module('app', ['ngAnimate', 'ui.router'])
       return reset();
     function getWordsHighlights(text) {
       return filter.split(' ').reduce(function(highlights, filter) {
+        if (filter.trim() === '')
+          return highlights;
         if (highlights.invalid)
           return [];
-        var newHighlights = getHighlights(text, filter).filter(function(h1) {
+        var newHighlights = getHighlights(text, filter);
+        newHighlights = newHighlights.filter(function(h1) {
           return highlights.filter(function(h2) {
             return h1.start === h2.start && h1.end === h2.end;
-          }).length === 0;
+          }).length < newHighlights.length;
         });
         if (!newHighlights.length) {
           highlights = [];
