@@ -186,7 +186,7 @@ angular.module('app', ['ngAnimate', 'ui.router'])
     if ($scope.items.length > 0)
       $state.go($scope.items[0].items[0].sref);
   }
-  $scope.onFIlterKeydown = function(e) {
+  $scope.onKeydown = function(e) {
     if (e.keyCode === 38) {
       e.preventDefault();
       $scope.items.forEach(function(item, i, items) {

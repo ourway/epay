@@ -23,8 +23,8 @@
       <a href="#">ارائه نظرات و پیشنهادات</a>
     </div>
     <div id="orange-seperator"></div>
-    <div id="sidebar" ng-controller="sidebarCtrl">
-      <input id="sidebar-search" placeholder="جستحو..." ng-model="filter" ng-change="onFilter()" ng-keydown="onFIlterKeydown($event)" />
+    <div id="sidebar" ng-controller="sidebarCtrl" ng-keydown="onKeydown($event)" >
+      <input id="sidebar-search" placeholder="جستحو..." ng-model="filter" ng-change="onFilter()" />
       <div ng-repeat="item in items">
         <a class="item header" ng-click="item.collapsed = !item.collapsed" ng-bind="item.title" epay-highlights="item.highlights"></a>
         <div class="group" ng-class="{collapsed: item.collapsed}">
