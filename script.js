@@ -208,7 +208,7 @@ angular.module('app', ['ngAnimate', 'ui.router'])
           if (item.sref === $state.current.name) {
             if (j !== subItems.length - 1)
               $state.go(subItems[j + 1].sref);
-            else if (i !== items.length + 1) {
+            else if (i !== items.length - 1) {
               subItems = items[i + 1].items; 
               $state.go(subItems[0].sref);
             }
