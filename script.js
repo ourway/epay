@@ -119,6 +119,16 @@ angular.module('app', ['ngAnimate', 'ui.router'])
   };
 })
 
+.controller('mainCtrl', function($scope) {
+  $scope.onKeydown = function(e) {
+    console.log(e);
+    if (e.keyCode === 114 || (e.ctrlKey && e.keyCode === 70)) {
+      e.preventDefault();
+      document.getElementById('sidebar-search').focus();
+    }
+  }
+})
+
 .controller('sidebarCtrl', function($scope, $state) {
   $scope.filter = '';
   $scope.$watch(function() { return $state.current; }, function(state) {
@@ -167,13 +177,42 @@ angular.module('app', ['ngAnimate', 'ui.router'])
       });
       item.items = newSubItems;
       return item;
+    }).filter (function(item) {
+      return item.items.length > 0;
     });
-    for (var i=0; i<$scope.items.length; i++) {
-      var item = $scope.items[i];
-      if (item.items.length > 0) {
-        $state.go(item.items[0].sref);
-        break;
-      }
+    if ($scope.items.length > 0)
+      $state.go($scope.items[0].items[0].sref);
+  }
+  $scope.onFIlterKeydown = function(e) {
+    if (e.keyCode === 38) {
+      e.preventDefault();
+      $scope.items.forEach(function(item, i, items) {
+        item.items.forEach(function(item, j, subItems) {
+          if (item.sref === $state.current.name) {
+            if (j !== 0)
+              $state.go(subItems[j - 1].sref);
+            else if (i !== 0) {
+              subItems = items[i - 1].items; 
+              $state.go(subItems[subItems.length - 1].sref);
+            }
+          }
+        })
+      });
+    }
+    else if (e.keyCode === 40) {
+      e.preventDefault();
+      $scope.items.forEach(function(item, i, items) {
+        item.items.forEach(function(item, j, subItems) {
+          if (item.sref === $state.current.name) {
+            if (j !== subItems.length - 1)
+              $state.go(subItems[j + 1].sref);
+            else if (i !== items.length + 1) {
+              subItems = items[i + 1].items; 
+              $state.go(subItems[0].sref);
+            }
+          }
+        })
+      });
     }
   }
 })

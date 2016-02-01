@@ -10,7 +10,7 @@
   <script src="uirouter.js"></script>
   <script src="script.js"></script>
 </head>
-<body ng-app="app">
+<body ng-app="app" ng-controller="mainCtrl" ng-keydown="onKeydown($event)">
   <div id="wrapper">
     <img src="images/epayment.header.JPG" alt="logo" />
     <div id="title">سیستم پرداخت اینترنتی بانک پاسارگاد</div>
@@ -24,9 +24,9 @@
     </div>
     <div id="orange-seperator"></div>
     <div id="sidebar" ng-controller="sidebarCtrl">
-      <input id="sidebar-search" placeholder="جستحو..." ng-model="filter" ng-change="onFilter()" />
+      <input id="sidebar-search" placeholder="جستحو..." ng-model="filter" ng-change="onFilter()" ng-keydown="onFIlterKeydown($event)" />
       <div ng-repeat="item in items">
-        <a class="item header" ng-click="item.collapsed = !item.collapsed" ng-if="item.items.length" ng-bind="item.title" epay-highlights="item.highlights"></a>
+        <a class="item header" ng-click="item.collapsed = !item.collapsed" ng-bind="item.title" epay-highlights="item.highlights"></a>
         <div class="group" ng-class="{collapsed: item.collapsed}">
           <a class="item" ng-repeat="item in item.items" ng-bind="item.title" epay-highlights="item.highlights" ui-sref="{{item.sref}}" ui-sref-active="active"></a>
         </div>

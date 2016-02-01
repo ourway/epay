@@ -112,6 +112,13 @@ a {
   padding: 2px 5px;
 }
 
+#sidebar #sidebar-search:focus {
+  border: 3px solid blue;
+  width: 100%;
+  margin: 3px 0;
+  padding: 2px 5px;
+}
+
 #contents {
   float: right;
   margin-top: 20px;
