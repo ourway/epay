@@ -80,7 +80,8 @@ angular.module('app', ['ngAnimate', 'ui.router'])
   function addRout(name) {
     $stateProvider.state(name, {
       url: '/' + name,
-      templateUrl: name + '.html'
+      templateUrl: name + '.html',
+      controller: name + 'Ctrl'
     });
   }
   sidebarItems.forEach(function(item) {
@@ -96,7 +97,9 @@ angular.module('app', ['ngAnimate', 'ui.router'])
       scope.$watch(attributes.epayHighlights, function(highlights) {
         if (highlights && highlights.length) {
           function isHighlighted(index) {
-            return highlights.filter(function (highlight) { return highlight.start <= index && index <= highlight.end; }).length > 0;
+            return highlights.filter(function (highlight) {
+              return highlight.start <= index && index <= highlight.end;
+            }).length > 0;
           }
           var value = scope.$eval(attributes.ngBind);
           var parts = [];
@@ -217,4 +220,78 @@ angular.module('app', ['ngAnimate', 'ui.router'])
       });
     }
   }
+})
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+.controller('shaparakBillPaymentCtrl', function() {
+
+})
+
+.controller('shaparakBatchBillPaymentCtrl', function() {
+
+})
+
+.controller('shaparakIrancellCCCtrl', function() {
+
+})
+
+.controller('shaparakMciCCCtrl', function() {
+
+})
+
+.controller('shaparakRightelCCCtrl', function() {
+
+})
+
+.controller('shaparakTaliyaCCCtrl', function() {
+
+})
+
+.controller('changePin2Ctrl', function() {
+
+})
+
+.controller('blockCardCtrl', function() {
+
+})
+
+.controller('payOrderCtrl', function() {
+
+})
+
+.controller('transferToAccountCtrl', function() {
+
+})
+
+.controller('balanceInquiryCtrl', function() {
+
+})
+
+.controller('getStatementCtrl', function() {
+
+})
+
+.controller('batchTransferCtrl', function() {
+
+})
+
+.controller('getCyberCardCtrl', function() {
+
+})
+
+.controller('extendCyberCardCtrl', function() {
+
+})
+
+.controller('chargeCyberCardCtrl', function() {
+
+})
+
+.controller('mobilePaymentDownloadCtrl', function() {
+
+})
+
+.controller('USSDCtrl', function() {
+
 })
