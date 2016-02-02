@@ -23,12 +23,12 @@
       <a href="#">ارائه نظرات و پیشنهادات</a>
     </div>
     <div id="orange-seperator"></div>
-    <div id="sidebar" ng-controller="sidebarCtrl" ng-keydown="onKeydown($event)" >
-      <input id="sidebar-search" placeholder="جستحو..." ng-model="filter" ng-change="onFilter()" />
+    <div id="sidebar" ng-controller="sidebarCtrl" ng-keydown="onKeydown($event)">
+      <input id="sidebar-search" placeholder="جستحو..." ng-model="filter" ng-change="onFilter()" dt-restrict-input dt-modifier="modifier" />
       <div ng-repeat="item in items">
-        <a class="item header" ng-click="item.collapsed = !item.collapsed" ng-bind="item.title" epay-highlights="item.highlights"></a>
+        <a class="item header" ng-click="item.collapsed = !item.collapsed" ng-bind="item.title" dt-highlights="item.highlights"></a>
         <div class="group" ng-class="{collapsed: item.collapsed}">
-          <a class="item" ng-repeat="item in item.items" ng-bind="item.title" epay-highlights="item.highlights" ui-sref="{{item.sref}}" ui-sref-active="active"></a>
+          <a class="item" ng-repeat="item in item.items" ng-bind="item.title" dt-highlights="item.highlights" ui-sref="{{item.sref}}" ui-sref-active="active"></a>
         </div>
       </div>
     </div>
@@ -47,14 +47,14 @@
       <legend>پرداخت از طریق شناسه قبض و شناسه پرداخت</legend>
       <div class="input-group">
         <label>شناسه قبض* :</label>
-        <input />
+        <input dt-restrict-input dt-validator="validator" dt-modifier="modifier" ng-model="testValue" />
         <a>
           <img src="images/help.png" alt="توضیحات بیشتر" />
         </a>
       </div>
       <div class="input-group">
         <label>شناسه پرداخت* :</label>
-        <input />
+        <input dt-restrict-input dt-validator="validator" dt-modifier="modifier" />
         <a>
           <img src="images/help.png" alt="توضیحات بیشتر" />
         </a>

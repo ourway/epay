@@ -54,6 +54,20 @@ var sidebarItems = [
   }
 ];
 
+function toPersian(string) {
+  string = '' + string;
+  var persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+  var persianChars = ['ش', 'ذ', 'ز', 'ی', 'ث', 'ب', 'ل', 'ا', 'ه', 'ت', 'ن', 'م', 'ئ', 'د', 'خ', 'ح', 'ض', 'ق', 'س', 'ف', 'ع', 'ر', 'ص', 'ط', 'غ', 'ظ'];
+  for (var i=0; i<persianDigits.length; i++)
+    string = string.replace(new RegExp(i, 'g'), persianDigits[i]);
+  for (var i=0; i<persianChars.length; i++)
+    string = string.replace(String.fromCharCode('a'.charCodeAt(0) + i), persianChars[i]);
+  string = string.replace(':', 'ک');
+  string = string.replace('þ', 'گ');
+  string = string.replace('¼', 'و');
+  return string;
+}
+
 function getHighlights(text, filter) {
   var results = [];
   for (var start = 0; start < text.length; start++) {
@@ -91,10 +105,112 @@ angular.module('app', ['ngAnimate', 'ui.router'])
   });
 })
 
-.directive('epayHighlights', function() {
+.directive('dtRestrictInput', function() {
+  return {
+    require: '?ngModel',
+    link: function(scope, input, attributes, ngModel) {
+      var validatorName = attributes.dtValidator;
+      var modifierName  = attributes.dtModifier;
+      var validator = scope.$eval(validatorName);
+      var modifier  = scope.$eval(modifierName);
+      if (!validator)
+        validator = function() { return true; };
+      if (!modifier)
+        modifier = function(x) { return x; };
+      var previousValFunction = input.val;
+      input.val = function(value) {        
+        if (value != null && ngModel)
+          ngModel.$setViewValue(value);
+        return previousValFunction.apply(input, arguments);
+      }
+      function getChar(key) {
+        if (key >= 96 && key <= 105)
+          return (key - 96) + '';
+        if (key === 191)
+          return '/';
+        if (key == 186)
+          return ':';
+        return String.fromCharCode(key).toLowerCase()
+      }
+      function isSpecialKey(key) {
+        return ~[13, 38, 40, 37, 39, 27, 32, 17, 18, 9, 16, 20, 91, 93, 8, 36, 35, 45, 46, 33, 34, 144, 
+                 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 145, 19].indexOf(key);
+      }
+      var previousVal = input.val();
+      input.on('keydown', function(e) {
+        var key = e.keyCode;
+        var start = input[0].selectionStart;
+        var end = input[0].selectionEnd;
+        var val = input.val();
+        if (key === 8) { // backspace
+          if (start !== end)
+            val = val.substr(0, start) + val.substr(end, val.length - end);
+          else {
+            val = val.substr(0, start - 1) + val.substr(end, val.length - end);
+            start--;
+          }
+        }
+        else if (key === 46) { // delete
+          if (start !== end)
+            val = val.substr(0, start) + val.substr(end, val.length - end);
+          else
+            val = val.substr(0, start) + val.substr(end + 1, val.length - end - 1);
+        }
+        else if (!e.ctrlKey && !isSpecialKey(key)) {
+          var char = getChar(key);
+          val = val.substr(0, start) + char + val.substr(end, val.length - end);
+          start++;
+        }
+        if (val === previousVal)
+          return;
+        if (modifier)
+          val = modifier(val);
+        if (validator(val)) {
+          input.val(val);
+          input[0].setSelectionRange(start, start);
+          previousVal = val;
+        }
+        e.preventDefault();
+      });
+      input.keydown = function(handler) {
+        input.on('keydown', function(e) {
+          var returnValue = handler(e);
+          if (returnValue != null) {
+            if (returnValue !== previousVal) {
+              var start = input[0].selectionStart;
+              var end = input[0].selectionEnd;
+              input.val(returnValue);
+              if (start !== end) {
+                end += returnValue.length - previousVal.length;
+                input[0].setSelectionRange(start, end);
+              }
+              previousVal = returnValue;
+            }
+            e.preventDefault();
+          }
+        });
+      };
+      input.on('keyup paste input', function() {
+        setTimeout(function() {
+          var val = input.val();
+          if (val !== previousVal) {
+            if (modifier)
+              val = modifier(val);
+            if (!validator(val))
+              val = previousVal;
+            input.val(val);
+            previousVal = val;
+          }
+        });
+      });
+    }
+  };
+})
+
+.directive('dtHighlights', function() {
   return {
     link: function(scope, element, attributes) {
-      scope.$watch(attributes.epayHighlights, function(highlights) {
+      scope.$watch(attributes.dtHighlights, function(highlights) {
         if (highlights && highlights.length) {
           function isHighlighted(index) {
             return highlights.filter(function (highlight) {
@@ -220,12 +336,18 @@ angular.module('app', ['ngAnimate', 'ui.router'])
       });
     }
   }
+
+  $scope.modifier = toPersian;
 })
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-.controller('shaparakBillPaymentCtrl', function() {
-
+.controller('shaparakBillPaymentCtrl', function($scope) {
+  $scope.validator = function(x) {
+    return x.length <= 13 && /^[۰-۹]*$/g.test(x);
+  }
+  $scope.modifier = toPersian;
+  $scope.$watch('testValue', function(x) { console.log(x); });
 })
 
 .controller('shaparakBatchBillPaymentCtrl', function() {
