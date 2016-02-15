@@ -56,15 +56,18 @@ var sidebarItems = [
 
 function toPersian(string) {
   string = '' + string;
-  var persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
-  var persianChars = ['ش', 'ذ', 'ز', 'ی', 'ث', 'ب', 'ل', 'ا', 'ه', 'ت', 'ن', 'م', 'ئ', 'د', 'خ', 'ح', 'ض', 'ق', 'س', 'ف', 'ع', 'ر', 'ص', 'ط', 'غ', 'ظ'];
+  var persianDigits = '۰۱۲۳۴۵۶۷۸۹';
+  var persianChars = 'شذزیثبلاهتنمئدخحضقسفعرصطغظ';
   for (var i=0; i<persianDigits.length; i++)
-    string = string.replace(new RegExp(i, 'g'), persianDigits[i]);
+    string = string.replace(new RegExp(i, 'g'), persianDigits.charAt(i));
   for (var i=0; i<persianChars.length; i++)
-    string = string.replace(String.fromCharCode('a'.charCodeAt(0) + i), persianChars[i]);
+    string = string.replace(String.fromCharCode('a'.charCodeAt(0) + i), persianChars.charAt(i));
   string = string.replace(':', 'ک');
   string = string.replace('þ', 'گ');
   string = string.replace('¼', 'و');
+  string = string.replace('ü', 'پ');
+  string = string.replace('û', 'ج');
+  string = string.replace('ý', 'چ');
   return string;
 }
 
@@ -91,16 +94,14 @@ angular.module('app', ['ngAnimate', 'ui.router'])
 
 .config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/shaparakBillPayment');
-  function addRout(name) {
-    $stateProvider.state(name, {
-      url: '/' + name,
-      templateUrl: name + '.html',
-      controller: name + 'Ctrl'
-    });
-  }
   sidebarItems.forEach(function(item) {
     item.items.forEach(function(item) {
-      addRout(item.sref);
+      var name = item.sref;
+      $stateProvider.state(name, {
+        url: '/' + name,
+        templateUrl: name + '.html',
+        controller: name + 'Ctrl'
+      });
     });
   });
 })
@@ -109,10 +110,8 @@ angular.module('app', ['ngAnimate', 'ui.router'])
   return {
     require: '?ngModel',
     link: function(scope, input, attributes, ngModel) {
-      var validatorName = attributes.dtValidator;
-      var modifierName  = attributes.dtModifier;
-      var validator = scope.$eval(validatorName);
-      var modifier  = scope.$eval(modifierName);
+      var validator = scope.$eval(attributes.dtValidator);
+      var modifier  = scope.$eval(attributes.dtModifier);
       if (!validator)
         validator = function() { return true; };
       if (!modifier)
@@ -250,26 +249,23 @@ angular.module('app', ['ngAnimate', 'ui.router'])
 .controller('sidebarCtrl', function($scope, $state) {
   $scope.filter = '';
   $scope.$watch(function() { return $state.current; }, function(state) {
-    if ($scope.filter === '')
-      $scope.previousState = $state.current.name;
+    $scope.previousState = $state.current.name;
   });
   function reset() {
     $scope.items = sidebarItems.map(function(item) { return angular.copy(item); });
-    if ($scope.previousState)
-      $state.go($scope.previousState);
   }
   reset();
+  $scope.items = sidebarItems.map(function(item) { return angular.copy(item); });
   $scope.onFilter = function() {
     var filter = $scope.filter;
     if (!filter)
       return reset();
     function getWordsHighlights(text) {
       return filter.split(' ').reduce(function(highlights, filter) {
-        if (filter.trim() === '')
+        filter = filter.trim();
+        if (!filter || highlights.invalid)
           return highlights;
-        if (highlights.invalid)
-          return [];
-        var newHighlights = getHighlights(text, filter);
+        var newHighlights = getHighlights(text, filter)
         newHighlights = newHighlights.filter(function(h1) {
           return highlights.filter(function(h2) {
             return h1.start === h2.start && h1.end === h2.end;
@@ -285,23 +281,20 @@ angular.module('app', ['ngAnimate', 'ui.router'])
     }
     $scope.items = sidebarItems.map(function(item) {
       item = angular.copy(item);
-      var headerInFilter = false;
       item.highlights = getWordsHighlights(item.title);
-      if (item.highlights.length)
-        headerInFilter = true;
-      var previousSubItems = item.items;
-      var newSubItems = [];
-      previousSubItems.forEach(function(item) {
-        item.highlights = getWordsHighlights(item.title);
-        if (item.highlights.length || headerInFilter)
-          newSubItems.push(item);
-      });
-      item.items = newSubItems;
+      if (!item.highlights.length) {
+        item.items = item.items.filter(function(item) {
+          item.highlights = getWordsHighlights(item.title);
+          return item.highlights.length;
+        });
+      }
       return item;
     }).filter (function(item) {
-      return item.items.length > 0;
+      return item.items.length;
     });
-    if ($scope.items.length > 0)
+    if ($scope.items.filter(function(item) { return item.items.filter(function(item) { return item.sref === $scope.previousState }).length }).length)
+      $state.go($scope.previousState);
+    else if ($scope.items.length > 0)
       $state.go($scope.items[0].items[0].sref);
   }
   $scope.onKeydown = function(e) {
