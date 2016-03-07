@@ -47,26 +47,26 @@
       <legend>پرداخت از طریق شناسه قبض و شناسه پرداخت</legend>
       <div class="input-group">
         <label>شناسه قبض* :</label>
-        <input dt-restrict-input dt-validator="validator" dt-modifier="modifier" ng-model="testValue" />
+        <input dt-restrict-input dt-validator="validator" dt-modifier="modifier" ng-model="billId" />
         <a>
           <img src="images/help.png" alt="توضیحات بیشتر" />
         </a>
       </div>
       <div class="input-group">
         <label>شناسه پرداخت* :</label>
-        <input dt-restrict-input dt-validator="validator" dt-modifier="modifier" />
+        <input dt-restrict-input dt-validator="validator" dt-modifier="modifier" ng-model="paymentId" />
         <a>
           <img src="images/help.png" alt="توضیحات بیشتر" />
         </a>
       </div>
       <div class="input-group">
         <label>پست الکترونیکی (اختیاری) :</label>
-        <input />
+        <input ng-model="email" />
         <a>
           <img src="images/help.png" alt="توضیحات بیشتر" />
         </a>
       </div>
-      <input type="submit" class="submit" value="ادامه" />
+      <input type="submit" class="submit" value="ادامه" ng-click="submit(billId, paymentId, email)" />
     </fieldset>
     <fieldset>
       <legend>پرداخت قبض موبایل از طریق شماره موبایل(همراه اول)</legend>

@@ -71,6 +71,13 @@ function toPersian(string) {
   return string;
 }
 
+function toNumber(string) {
+  var persianDigits = '۰۱۲۳۴۵۶۷۸۹';
+  for (var i=0; i<persianDigits.length; i++)
+    string = string.replace(persianDigits.charAt(i), i);
+  return +string;
+}
+
 function getHighlights(text, filter) {
   var results = [];
   for (var start = 0; start < text.length; start++) {
@@ -335,12 +342,26 @@ angular.module('app', ['ngAnimate', 'ui.router'])
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-.controller('shaparakBillPaymentCtrl', function($scope) {
+.controller('shaparakBillPaymentCtrl', function($scope, $http) {
   $scope.validator = function(x) {
     return x.length <= 13 && /^[۰-۹]*$/g.test(x);
   }
   $scope.modifier = toPersian;
-  $scope.$watch('testValue', function(x) { console.log(x); });
+  $scope.submit = function (billId, paymentId, email) {
+    billId = toNumber(billId);
+    paymentId = toNumber(paymentId);
+    console.log(billId, paymentId, email);
+    $http.get('/home', {
+      billId: billId,
+      paymentId: paymentId,
+      email: email
+    })
+    .then(function (response) {
+      console.log('success', response);
+    }, function (response) {
+      console.log('error', response);
+    });
+  }
 })
 
 .controller('shaparakBatchBillPaymentCtrl', function() {
